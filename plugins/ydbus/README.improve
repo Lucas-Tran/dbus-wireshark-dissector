@@ -1,0 +1,31 @@
+The following idea on improve dbus for wireshark
+1. Create link for method_reply packet
+2. Let the header field easy to understand and catch up
+	2.1 add detail on header field title
+3. Can add the custom column with following information
+X	3.1 Message Serial
+X	3.2 Object Path
+X	3.3 Interface
+	3.4 Member
+	3.5 Value info
+4. Able to create the custom column for when dbus plug ins is hand off
+	4.1 if the custom columns are already created, just skip
+5. Add extra information 
+	5.1 process id
+	5.2 process name
+	5.3 strip out packet process id/process name information in detail view
+6. able to search/filter/order by:
+X	6.1 Message Serial
+X	6.2 Message path
+X	6.3 interface
+X	6.4 member
+7. able to search/filter/order by 
+	7.1 process id
+	7.2 process name
+8. parse container signature
+    container   ARRAY   97 (ASCII 'a')  Array
+container   STRUCT  114 (ASCII 'r'), 40 (ASCII '('), 41 (ASCII ')') Struct; type code 114 'r' is reserved for use in bindings and implementations to represent the general concept of a struct, and must not appear in signatures used on D-Bus.
+container   VARIANT 118 (ASCII 'v') Variant type (the type of the value is part of the value itself)
+container   DICT_ENTRY  101 (ASCII 'e'), 123 (ASCII '{'), 125 (ASCII '}')   Entry in a dict or map (array of key-value pairs). Type code 101 'e' is reserved for use in bindings and implementations to represent the general concept of a dict or dict-entry, and must not appear in signatures used on D-Bus.
+    
+	
