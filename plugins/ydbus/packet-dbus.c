@@ -27,7 +27,8 @@
 #define NEW_PROTO_TREE_API
 
 #define DBUSDUMP_HDR_FIELD_EXT_PID_PATH 1
-#define DBUS_BODY_PARSER_TESTING        1
+#define DBUS_BODY_PARSER_TESTING        0
+#undef DEBUG_ydbus
 
 #include "config.h"
 
@@ -42,7 +43,6 @@
 #endif
 
 
-#define DEBUG_ydbus
 #define UNUSED(x) (void)(x)
 
 #if (defined(DEBUG_ydbus) || defined(DEBUG_ydbus))
@@ -73,6 +73,7 @@ void _dbus_debuglog_tvb_dump(tvbuff_t *tvb, guint32 pos, guint32 len)
                     tvb_get_guint8(tvb, pos) )
     pos_end = pos + len;
     g_print("tvb_length = %d\n", tvb_length(tvb));
+return;
 
     for (i=0; i< len  ; i += 16)
     {
@@ -116,8 +117,8 @@ void _dbus_debuglog_tvb_dump(tvbuff_t *tvb, guint32 pos, guint32 len)
 }
 
 #else
-#   define DEBUGLOG(x) ;
-#   define DEBUGLOG_DUMP(buf, len, fmt, ...);
+#   define DEBUGLOG(fmt,...) ;
+#   define DEBUGLOG_TVB_DUMP(buf, pos, len)
 #endif
 
 
@@ -409,7 +410,7 @@ static void dbus_body_parser_test_record_stop(void)
 
 static void dbus_body_parser_test_append_sig_value(char sig, char *buf, guint32 buf_max_len, dbus_val_t *val )
 {
-    #define TMP_STR_LEN     BODY_PARSER_TEST_STR_MAX_LEN
+    #define TMP_STR_LEN     20
     char tmp[TMP_STR_LEN + 1 ];
 
     switch (sig){
@@ -442,7 +443,7 @@ static void dbus_body_parser_test_append_sig_value(char sig, char *buf, guint32 
         case DBUS_TYPE_STRING:
         case DBUS_TYPE_OBJECT_PATH:
         case DBUS_TYPE_SIGNATURE:
-            strncpy(tmp, val->str, BODY_PARSER_TEST_STR_MAX_LEN);
+            strncpy(tmp, val->str, TMP_STR_LEN);
             break;
     }
 
